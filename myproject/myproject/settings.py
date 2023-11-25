@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import json
+from os import environ
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -77,7 +80,7 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
@@ -133,3 +136,10 @@ STORAGES = {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
 }
+
+if "DATABASE_SECRET" in environ:
+    database_secret = environ.get("DATABASE_SECRET")
+    db_url = json.loads(database_secret)["DATABASE_URL"]
+    DATABASES = {"default": dj_database_url.parse(db_url)}
+else:
+    DATABASES = {"default": dj_database_url.parse("sqlite:///db.sqlite3")}
