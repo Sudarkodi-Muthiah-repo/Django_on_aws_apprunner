@@ -1,5 +1,5 @@
 # Django_on_aws_apprunner
-Sample Django Project to deploy it in AWS App Runner.
+Sample Django Project to deploy on AWS App Runner.
 ![Deploy and Scale Django applications on AWS App Runner](https://github.com/Sudarkodi-Muthiah-repo/12weeksAWSworkshopchallenge/tree/main/Week7)
 ```
 .
